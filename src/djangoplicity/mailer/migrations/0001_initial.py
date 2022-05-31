@@ -41,7 +41,7 @@ class Migration(migrations.Migration):
                 ('timestamp', models.DateTimeField(auto_now_add=True, db_index=True)),
                 ('recipient', models.CharField(max_length=255, db_index=True)),
                 ('success', models.BooleanField(default=False, db_index=True)),
-                ('message', models.ForeignKey(to='mailer.Message')),
+                ('message', models.ForeignKey(to='mailer.Message', on_delete=django.db.models.deletion.CASCADE)),
             ],
             options={
             },
@@ -52,7 +52,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('to_email', models.CharField(max_length=255)),
-                ('message', models.ForeignKey(to='mailer.Message')),
+                ('message', models.ForeignKey(to='mailer.Message', on_delete=django.db.models.deletion.CASCADE)),
             ],
             options={
             },

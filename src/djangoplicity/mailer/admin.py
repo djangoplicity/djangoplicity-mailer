@@ -47,7 +47,7 @@ from django.urls import reverse
 from django.db.utils import IntegrityError
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
-from django.utils.encoding import force_unicode
+from django.utils.encoding import force_text
 from django.utils.translation import ugettext as _
 from djangoplicity.mailer.forms import MessageForm
 from djangoplicity.mailer.models import Message, MessageLog, Recipient
@@ -145,7 +145,7 @@ class MessageAdmin( admin.ModelAdmin ):
             form = SendTestMessageForm()
 
         ctx = {
-            'title': _( '%s: Send test email' ) % force_unicode( self.model._meta.verbose_name ).title(),
+            'title': _( '%s: Send test email' ) % force_text( self.model._meta.verbose_name ).title(),
             'adminform': form,
             'original': msg,
         }
@@ -180,7 +180,7 @@ class MessageAdmin( admin.ModelAdmin ):
             form = SendMessageForm()
 
         ctx = {
-            'title': _( '%s: Send now' ) % force_unicode( self.model._meta.verbose_name ).title(),
+            'title': _( '%s: Send now' ) % force_text( self.model._meta.verbose_name ).title(),
             'adminform': form,
             'original': msg,
             'groups': msg.get_contact_groups_recipients(),

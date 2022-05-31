@@ -237,7 +237,7 @@ class MessageLog( models.Model ):
     Log for a sent message.
     """
     timestamp = models.DateTimeField( auto_now_add=True, db_index=True )
-    message = models.ForeignKey( Message )
+    message = models.ForeignKey( Message, on_delete=models.CASCADE)
     recipient = models.CharField( max_length=255, db_index=True )
     success = models.BooleanField( default=False, db_index=True )
 
@@ -246,7 +246,7 @@ class Recipient( models.Model ):
     """
     Recipient of a message
     """
-    message = models.ForeignKey( Message )
+    message = models.ForeignKey( Message, on_delete=models.CASCADE)
     to_email = models.CharField( max_length=255 )
 
     def save( self, *args, **kwargs ):

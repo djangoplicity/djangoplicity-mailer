@@ -1,0 +1,66 @@
+{% extends "admin/mailer/message/change_form.html" %}{% load i18n %}
+
+{% block extrahead %}{{ block.super }}
+<script type="text/javascript">
+window.__admin_media_prefix__ = "{% filter escapejs %}{{ STATIC_URL}}/admin/{% endfilter %}";
+</script>
+{% url 'admin:jsi18n' as jsi18nurl %}
+<script type="text/javascript" src="{{ jsi18nurl|default:"../../../../jsi18n/" }}"></script>
+{{ media }}
+<script type="text/javascript" src="{{ STATIC_URL}}/admin/js/core.js"></script>
+{{ adminform.media }}
+{% endblock %}
+
+
+
+{% block breadcrumbs %}{% if not is_popup %}
+<div class="breadcrumbs">
+     <a href="../../../..">{% trans "Home" %}</a> &rsaquo;
+     <a href="../../..">{{ app_label|capfirst|escape }}</a> &rsaquo;
+     <a href="../..">{{ opts.verbose_name_plural|capfirst }}</a> &rsaquo;
+     <a href="..">{{ original }}</a> &rsaquo;
+     {% trans "Recipients" %}
+</div>
+{% endif %}{% endblock %}
+
+
+{% block content %}<div id="content-main">
+{% if original.sent or original.queued %}
+<fieldset class="module" style="background-color: #FFC; ">
+<div class="form-row">
+<p>Recipients list cannot be modified. Message have already been sent or is in the queue for being sent.</p>
+</div>
+</fieldset>
+{% else %}
+<form action="" method="post" id="{{ opts.model_name }}_form">{% csrf_token %}{% block form_top %}{% endblock %}
+<div>
+{% if is_popup %}<input type="hidden" name="_popup" value="1" />{% endif %}
+{% if adminform.errors %}
+    <p class="errornote">
+    {% blocktrans count adminform.errors|length as counter %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
+    </p>
+    {{ adminform.non_field_errors }}
+{% endif %}
+
+<fieldset class="module aligned">
+<h2>Recipients</h2>
+{% for f in adminform %}
+<div class="form-row">
+    {{f.label_tag}}
+    {{f}}
+    {% if f.help_text %}<p class="help">{{f.help_text}}</p>{% endif %}
+    {{f.errors}}
+</div>
+{% endfor %}
+</fieldset>
+
+{% load i18n %}
+<div class="submit-row" {% if is_popup %}style="overflow: auto;"{% endif %}>
+<input type="submit" value="{% trans 'Import recipients' %}" class="default" name="_generate" {{ onclick_attrib }}/>
+</div>
+
+</div>
+</form>
+{% endif %}
+</div>
+{% endblock %}

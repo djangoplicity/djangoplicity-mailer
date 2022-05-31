@@ -1,0 +1,22 @@
+<fieldset class="module aligned">
+<h2>Header</h2>
+<div class="form-row"><label>From</label><span>{{original.from_name}} &lt;{{original.from_email}}&gt;</span></div>
+{% if original.reply_to %}<div class="form-row"><label>Reply-to</label><span>{{original.reply_to}}</span></div>{% endif %}
+<div class="form-row"><label>Subject</label><span>{{original.subject}}</span></div>
+</fieldset>
+
+{% if original.is_html %}
+<fieldset class="module">
+<h2>HTML version</h2>
+<div class="form-row">
+<iframe src="../html/" frameborder="0" width="100%"  height="500"></iframe>
+</div>
+</fieldset>
+{% endif %}
+
+<fieldset class="module">
+<h2>Text version</h2>
+<div class="form-row">
+<iframe src="../text/" width="100%"  height="500"></iframe>
+</div>
+</fieldset>

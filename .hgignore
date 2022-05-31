@@ -1,0 +1,5 @@
+
+syntax: regexp
+src/djangoplicity_mailer\.egg-info$
+syntax: glob
+*.pyc

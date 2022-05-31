@@ -1,0 +1,18 @@
+{% extends "admin/change_form.html" %}{% load i18n %}
+{% load i18n admin_urls admin_modify %}
+
+{% block object-tools %}
+{% if change %}{% if not is_popup %}
+  <ul class="object-tools">
+    {% block object-tools-items %}
+    {% if not original.sent and not original.queued %}<li><a href="{% url 'admin_site:mailer_send_now' original.pk %}" class="historylink">{% trans "Send now" %}</a></li>{% endif %}
+    <li><a href="{% url 'admin_site:mailer_send_test' original.pk %}" class="historylink">{% trans "Send test" %}</a></li>
+    <li><a href="{% url 'admin_site:mailer_recipient_changelist' %}?message={{ object_id }}" class="historylink">{% trans "Recipients" %}</a></li>
+    {% if not original.sent and not original.queued %}<li><a href="{% url 'admin_site:mailer_import' original.pk %}" class="addlink">{% trans "Add/remove recipients" %}</a></li>{% endif %}
+    <li><a href="{% url 'admin_site:mailer_messagelog_changelist' %}?message={{ object_id }}" class="viewsitelink">{% trans "Messages log" %}</a></li>
+    <li><a href="{% url opts|admin_urlname:'history' original.pk|admin_urlquote %}" class="historylink">{% trans "History" %}</a></li>
+    {% if has_absolute_url %}<li><a href="../../../r/{{ content_type_id }}/{{ object_id }}/" class="viewsitelink">{% trans "View on site" %}</a></li>{% endif%}
+    {% endblock %}
+  </ul>
+{% endif %}{% endif %}
+{% endblock %}

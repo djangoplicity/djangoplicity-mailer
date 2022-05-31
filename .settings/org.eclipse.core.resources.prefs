@@ -1,0 +1,10 @@
+#Tue Oct 04 16:52:21 CEST 2011
+eclipse.preferences.version=1
+encoding//src/djangoplicity/__init__.py=utf-8
+encoding//src/djangoplicity/mailer/__init__.py=utf-8
+encoding//src/djangoplicity/mailer/admin.py=utf-8
+encoding//src/djangoplicity/mailer/forms.py=utf-8
+encoding//src/djangoplicity/mailer/models.py=utf-8
+encoding//src/djangoplicity/mailer/tasks.py=utf-8
+encoding//src/djangoplicity/mailer/views.py=utf-8
+encoding/setup.py=utf-8
